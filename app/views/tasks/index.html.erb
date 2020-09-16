@@ -10,7 +10,9 @@
       <td><%= task.title %></td>
       <td><%= task.content %></td>
       <td><% link_to "詳細を確認する。", task_path(task.id) %></td>
+      <td><%= link_to "タスクを編集する", edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
       <% end %>
     </tr>
   </table>
 </div>
+<%= link_to '新しくタスクを追加する', new_task_path %>
