@@ -41,7 +41,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
   describe '詳細表示機能' do#describeには、「何の仕様についてなのか」
     context '任意のタスク詳細画面に遷移した場合' do#contextには「状況・状態を分類」したテスト内容
       it '該当タスクの内容が表示される' do
-        task = FactoryBot.create(:task, title: 'task5', content:'content5-show', time_limit: '2020-10-01 12:00:00', status: '未着手',priority: '中')
+        task = FactoryBot.create(:task, title: 'task5', content:'content5-show')
         visit task_path(task.id)
         expect(page).to have_content 'show'
       end
