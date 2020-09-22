@@ -1,6 +1,6 @@
 # README
 
-#Task
+## Task
 
 |  カラム名  |    データ型   |
 ----|----
@@ -11,7 +11,7 @@
 | updated_at  | datetime |
 
 
-#User
+## User
 
 |  カラム名  |    データ型   |
 ----|----
@@ -20,14 +20,14 @@
 | email           | string   |
 | password_digest | string |
 
-#Label
+## Label
 
 |  カラム名  |    データ型   |
 ----|----
 | id   | integer |
 | name | string  |
 
-#Labelling
+## Labelling
 
 |  カラム名  |    データ型   |
 ----|----
