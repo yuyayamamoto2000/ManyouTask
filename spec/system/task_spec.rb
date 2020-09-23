@@ -49,7 +49,6 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         #タスク一覧ページに遷移
         visit tasks_path
          _task_list = all('.task_row')
-         binding.pry
       end
     end
   end
