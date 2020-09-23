@@ -37,8 +37,8 @@
 
 ## Herokuデプロイ手順
 1. デプロイするアプリのディレクトリへ移動  
-  1-1.Herokuにログイン  
-  1-2.$ heroku login  
+  1-1.Herokuにログイン
+  1-2.$ heroku login
 2.アセットプリコンパイルをする  
   2-1.$ rails assets:precompile RAILS_ENV=production  
 3.アプリを追加・コミットする  
