@@ -1,6 +1,7 @@
 <h1>投稿一覧</h1>
 <div class="contents">
   <table>
+    <body>
     <tr>
       <th>タイトル</th>
       <th>内容</th>
@@ -14,6 +15,7 @@
       <td><%= link_to "タスクを削除する", task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
       <% end %>
     </tr>
+    </body>
   </table>
 </div>
 <%= link_to '新しくタスクを追加する', new_task_path %>

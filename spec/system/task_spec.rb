@@ -34,7 +34,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         # テストで使用するためのタスクを作成
-        _task = FactoryBot.create(:task, title: 'task')
+        task = FactoryBot.create(:task)
         # タスク一覧ページに遷移
         visit tasks_path
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
@@ -48,8 +48,8 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
       it '新しいタスクが一番上に表示される' do
         #タスク一覧ページに遷移
         visit tasks_path
-         task_list = all('.task_row')
-         expect(task_list[0]).to have_content 'second_task'
+         task_list = all('td')
+         expect(task_list[0]).to have_content 'Factoryで作ったデフォルトのタイトル２'
       end
     end
   end
