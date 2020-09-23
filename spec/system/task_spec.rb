@@ -48,7 +48,8 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
       it '新しいタスクが一番上に表示される' do
         #タスク一覧ページに遷移
         visit tasks_path
-         _task_list = all('.task_row')
+         task_list = all('.task_row')
+         expect(task_list[0]).to have_content 'second_task'
       end
     end
   end

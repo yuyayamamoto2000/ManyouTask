@@ -14,9 +14,9 @@ class TasksController < ApplicationController
       render :new
     else
       if @task.save
-        redirect_to tasks_path, notice: 'タスクを追加しました。'
+        redirect_to tasks_path, notice: t('controller.add_task')
       else
-        flash.now[:danger] = 'タスクの追加が失敗しました。'
+        flash.now[:danger] = t('controller.add_failure')
         render :new
       end
     end
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: 'タスクを編集しました。'
+      redirect_to tasks_path, notice: t('controller.edit_task')
     else
       render :edit
     end
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: 'タスクを削除しました。'
+    redirect_to tasks_path, notice: t('controller.delete_task')
   end
 
   private

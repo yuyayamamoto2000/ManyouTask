@@ -1,0 +1,6 @@
+ja:
+  controller:
+    add_task: タスクを追加できました。
+    add_failure: タスクの追加に失敗しました。
+    edit_task: タスクを編集しました。
+    delete_task: タスクを削除しました。
