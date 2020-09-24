@@ -4,11 +4,13 @@
     <tr>
       <th>タイトル</th>
       <th>内容</th>
+      <th>終了期限</th>
     </tr>
     <% @tasks.each do |task| %>
     <tr>
       <td class="task_row"><%= task.title %></td>
       <td class="task_row"><%= task.content %></td>
+      <td><%= task.time_limit %></td>
       <td><% link_to "詳細を確認する。", task_path(task.id) %></td>
       <td><%= link_to "タスクを編集する", edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
       <td><%= link_to "タスクを削除する", task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
