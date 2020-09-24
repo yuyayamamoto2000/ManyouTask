@@ -3,7 +3,7 @@ example_id                            | status | run_time        |
 ./spec/models/task_spec.rb[1:1:1:1:1] | passed | 0.00082 seconds |
 ./spec/models/task_spec.rb[1:1:1:2:1] | passed | 0.00309 seconds |
 ./spec/models/task_spec.rb[1:1:1:3:1] | passed | 0.00629 seconds |
-./spec/system/task_spec.rb[1:1:1:1]   | passed | 3.71 seconds    |
-./spec/system/task_spec.rb[1:2:1:1]   | passed | 0.18414 seconds |
-./spec/system/task_spec.rb[1:2:2:1]   | passed | 0.15963 seconds |
-./spec/system/task_spec.rb[1:3:1:1]   | passed | 0.16743 seconds |
+./spec/system/task_spec.rb[1:1:1:1]   | passed | 3.84 seconds    |
+./spec/system/task_spec.rb[1:2:1:1]   | passed | 0.18303 seconds |
+./spec/system/task_spec.rb[1:2:2:1]   | passed | 12.67 seconds   |
+./spec/system/task_spec.rb[1:3:1:1]   | passed | 0.13865 seconds |
