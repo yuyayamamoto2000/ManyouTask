@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     if params[:sort_expired] == "true"
       @tasks = Task.all.order(time_limit: "DESC")
     else
-      @tasks = Task.all.order(params[:sort])
+      @tasks = Task.all.order(created_at: "DESC")
     end
   end
 

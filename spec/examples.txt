@@ -3,13 +3,8 @@ example_id                            | status | run_time        |
 ./spec/models/task_spec.rb[1:1:1:1:1] | passed | 0.00082 seconds |
 ./spec/models/task_spec.rb[1:1:1:2:1] | passed | 0.00309 seconds |
 ./spec/models/task_spec.rb[1:1:1:3:1] | passed | 0.00629 seconds |
-<<<<<<< HEAD
-./spec/system/task_spec.rb[1:1:1:1]   | passed | 1.45 seconds    |
-./spec/system/task_spec.rb[1:2:1:1]   | passed | 0.09903 seconds |
-./spec/system/task_spec.rb[1:3:1:1]   | passed | 2.46 seconds    |
-=======
-./spec/system/task_spec.rb[1:1:1:1]   | passed | 3.84 seconds    |
-./spec/system/task_spec.rb[1:2:1:1]   | passed | 0.18303 seconds |
-./spec/system/task_spec.rb[1:2:2:1]   | passed | 12.67 seconds   |
-./spec/system/task_spec.rb[1:3:1:1]   | passed | 0.13865 seconds |
->>>>>>> 5f591a1c4d1133a0b7c0962164e3cfc3f68449ca
+./spec/system/task_spec.rb[1:1:1:1]   | passed | 3.28 seconds    |
+./spec/system/task_spec.rb[1:2:1:1]   | passed | 0.12899 seconds |
+./spec/system/task_spec.rb[1:2:2:1]   | passed | 0.10583 seconds |
+./spec/system/task_spec.rb[1:2:3:1]   | passed | 0.21557 seconds |
+./spec/system/task_spec.rb[1:3:1:1]   | passed | 0.10573 seconds |

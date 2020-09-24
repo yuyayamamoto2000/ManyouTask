@@ -37,15 +37,27 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         #タスク一覧ページに遷移
         visit tasks_path
         task_list = all('td.task_row')
-        binding.pry
         expect(task_list[0]).to have_content 'name3'
+      end
+    end
+    context 'タスクに終了期限が設けられてる場合' do
+      before do
+        FactoryBot.create(:first_task)
+        FactoryBot.create(:second_task)
+        FactoryBot.create(:third_task)
+      end
+      it '期限が迫っているタスクが一番上に表示される' do
+        visit tasks_path
+        click_on '終了期限でソートする'
+        task_limit = all('td.task_limit_row')
+        expect(task_limit[0]).to have_content '2020-09-30 12:00:00'
       end
     end
   end
   describe '詳細表示機能' do#describeには、「何の仕様についてなのか」
     context '任意のタスク詳細画面に遷移した場合' do#contextには「状況・状態を分類」したテスト内容
       it '該当タスクの内容が表示される' do
-        task = FactoryBot.create(:task, title: 'task5', content:'content5-show')
+        task = FactoryBot.create(:task, title: 'task5', content:'content5-show', time_limit: '2020-09-20 12:00:00' )
         visit task_path(task.id)
         expect(page).to have_content 'show'
       end
