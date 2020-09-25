@@ -1,4 +1,15 @@
 <h1>投稿一覧</h1>
+
+<div class="search-form">
+  <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
+  <%= f.text_field :title %>
+</div>
+<div class="actions">
+  <%# f.submit(t('helpers.submit.search')) %>
+  <%= f.submit '検索' %>
+</div>
+  <% end %>
+
 <div class="contents">
   <table>
     <tr>
