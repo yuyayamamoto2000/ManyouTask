@@ -7,9 +7,11 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         _task = Task.new
         fill_in 'task[title]', with: 'タスク名'
         fill_in 'task[content]',with: 'タスク詳細'
+        fill_in 'task[time_limit]',with: '2020-09-21 12:00:00'
         click_on 'commit'
         expect(page).to have_content 'タスク名'
         expect(page).to have_content 'タスク詳細'
+        expect(page).to have_content '2020-09-21 12:00:00'
       end
     end
   end
@@ -20,6 +22,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         _task = FactoryBot.create(:task, title: 'task')
         # タスク一覧ページに遷移
         visit tasks_path
+        binding.pry
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）
         expect(page).to have_content 'task'
@@ -63,4 +66,33 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
       end
     end
   end
+
+  # describe '検索機能' do
+  #   before do
+  #     # 必要に応じて、テストデータの内容を変更して構わない
+  #     FactoryBot.create(:first_task, title: "name1")
+  #     FactoryBot.create(:second_task, title: "name2")
+  #   end
+  #   context 'タイトルであいまい検索をした場合' do
+  #     it "検索キーワードを含むタスクで絞り込まれる" do
+  #       visit tasks_path
+  #       # タスクの検索欄に検索ワードを入力する (例: task)
+  #       fill_in 'search[title]', 'na'
+  #       # 検索ボタンを押す
+  #       click_on :search[title]
+  #       expect(page).to have_content 'name1'
+  #     end
+  #   end
+  #   context 'ステータス検索をした場合' do
+  #     it "ステータスに完全一致するタスクが絞り込まれる" do
+  #       # ここに実装する
+  #       # プルダウンを選択する「select」について調べてみること
+  #     end
+  #   end
+  #   context 'タイトルのあいまい検索とステータス検索をした場合' do
+  #     it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+  #       # ここに実装する
+  #     end
+  #   end
+  # end
 end
