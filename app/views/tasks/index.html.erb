@@ -3,9 +3,9 @@
 <div class="search-form">
   <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
   <%= f.text_field :title %>
+  <%= f.text_field :priority %>
 </div>
 <div class="actions">
-  <%# f.submit(t('helpers.submit.search')) %>
   <%= f.submit '検索' %>
 </div>
   <% end %>
@@ -16,12 +16,14 @@
       <th>タイトル</th>
       <th>内容</th>
       <th>終了期限</th>
+      <th>進捗</th>
     </tr>
     <% @tasks.each do |task| %>
     <tr>
       <td class="task_row"><%= task.title %></td>
       <td class="task_row"><%= task.content %></td>
       <td class="task_limit_row"><%= task.time_limit %></td>
+      <td class="task_priority"><%= task.priority %></td>
       <td><% link_to "詳細を確認する。", task_path(task.id) %></td>
       <td><%= link_to "タスクを編集する", edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
       <td><%= link_to "タスクを削除する", task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>

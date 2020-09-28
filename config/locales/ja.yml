@@ -1,5 +1,7 @@
 ---
 ja:
+  view:
+    back: 戻る
   activerecord:
     errors:
       messages:

@@ -18,5 +18,16 @@
     <%= form.label :content %>
     <%= form.text_field :content %>
   </div>
+
+  <div class="task_time_limit">
+    <%= form.label :time_limit %>
+    <%= form.datetime_select :time_limit %>
+  </div>
+
+  <div class="task_priority">
+    <%= form.label :priority %>
+    <%= form.text_field :priority %>
+  </div>
+
   <%= form.submit %>
 <% end %>

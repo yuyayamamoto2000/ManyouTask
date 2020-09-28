@@ -1,13 +1,22 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
+    # @tasks = Task.all
     if params[:sort_expired] == "true"
       @tasks = Task.all.order(time_limit: "DESC")
-    elsif params[:search][:title].present?
-      @tasks = Task.where('title like ?',"%#{params[:search][:title]}%")#ここであいまい検索のパラメーターを受け取る
+      # elsif params[:search][:title].present?
+      #   @tasks = Task.where('title like ?',"%#{params[:search][:title]}%")#ここであいまい検索のパラメーターを受け取る
+      # elsif params[:search][:priority].present?
+      #   @tasks = Task.where(priority: params[:priority])
     else
       @tasks = Task.all.order(created_at: "DESC")
       # @tasks.where('title like ?','%params[:search]%') if params[:search][:title].present?
+    end
+    if params[:search][:title].present? && params[:search][:priority].present?
+    elsif params[:search][:title].present?
+      @tasks = Task.where('title like ?',"%#{params[:search][:title]}%")#ここであいまい検索のパラメーターを受け取る
+    elsif params[:search][:priority].present?
+      @tasks = Task.where('priority like ?',"%#{params[:search][:priority]}%")#
     end
   end
 
@@ -52,7 +61,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :time_limit)
+    params.require(:task).permit(:title, :content, :time_limit, :priority)
   end
 
   def set_task
