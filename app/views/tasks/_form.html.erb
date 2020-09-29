@@ -22,8 +22,8 @@
     <%= f.datetime_select :time_limit %>
   </div>
 
-  <%= f.select :priority, [["着手", "already"], ["未着手", "not_yet"]], include_blank: "選択して下さい" %>
-
+  <%= f.select(:priority, {未着手: '未着手', 着手中: '着手中', 完了: '完了'}, { class: "task_priority" }) %>
+  <%= f.select(:to_do, {高: '高', 中: '中', 低: '低'}, { class: "task_to_do" }) %>
   <%= f.submit %>
 <% end %>
 <%= link_to t('view.back'), tasks_path %>

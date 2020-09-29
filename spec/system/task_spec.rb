@@ -10,7 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         fill_in 'task[title]', with: 'タスク名'
         fill_in 'task[content]',with: 'タスク詳細'
         select 2018, from: 'task_time_limit_1i'
-        select '着手', from: 'task_priority'
+        select '未着手', from: 'task_priority'
         click_on 'commit'
         expect(page).to have_content 'タスク名'
         #expect(page).to have_content 'タスク詳細'
@@ -81,16 +81,16 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
         # タスクの検索欄に検索ワードを入力する (例: task)
-        fill_in 'search[title]', with: 'na'
+        fill_in 'search[title]', with: '3'
         # 検索ボタンを押す
         click_on :commit
-        expect(page).to have_content 'name1'
+        expect(page).to have_content 'name3'
       end
     end
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
         visit tasks_path
-        fill_in 'search[priority]', with: '未着手'
+        select "未着手", from: 'search[priority]'
         expect(page).to have_content 'name3'
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
         visit tasks_path
         fill_in 'search[title]', with: 'name3'
-        fill_in 'search[priority]', with: '未着手'
+        select '未着手', from: 'search[priority]'
         expect(page).to have_content 'name3'
       end
     end
