@@ -59,6 +59,19 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         expect(task_limit[0]).to have_content '2020-09-30 12:00:00'
       end
     end
+    context 'タスクに優先順位が設けられてる場合' do
+      before do
+        FactoryBot.create(:first_task)
+        FactoryBot.create(:second_task)
+        FactoryBot.create(:third_task)
+      end
+      it '優先順位が高い順に並び替える' do
+        visit tasks_path
+        click_on '優先順位でソートする'
+        task_to_do = all('td.task_to_do')
+        expect(task_to_do[0]).to have_content '高'
+      end
+    end
   end
   describe '詳細表示機能' do#describeには、「何の仕様についてなのか」
     context '任意のタスク詳細画面に遷移した場合' do#contextには「状況・状態を分類」したテスト内容
