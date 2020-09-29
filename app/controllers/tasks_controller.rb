@@ -1,26 +1,29 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
+    @tasks = Task.all
     if params[:sort_to_do] == "true"
-      @tasks = Task.all.order(to_do: "ASC")
+      @tasks = @tasks.order(to_do: "ASC")
     else
-      @tasks = Task.all.order(to_do: "DESC")
+      @tasks = @tasks.order(to_do: "DESC")
       if params[:sort_expired] == "true"
-        @tasks = Task.all.order(time_limit: "DESC")
+        @tasks = @tasks.order(time_limit: "DESC")
       else
-        @tasks = Task.all.order(created_at: "DESC")
-        if params[:search]
-          if params[:search][:title].present? && params[:search][:priority].present?
+        @tasks = @tasks.order(created_at: "DESC")
+        if params[:search] && params[:search][:title].present?
+          #if params[:search][:title].present? && params[:search][:priority].present?
             @tasks = Task.title_search(params[:search][:title]).priority_search(params[:search][:priority])
-          elsif params[:search][:title].present?
-            @tasks = Task.title_search(params[:search][:title])#ここであいまい検索のパラメーターを受け取る
-          elsif params[:search][:priority].present?
+          #elsif params[:search][:title].present?
+            #@tasks = Task.title_search(params[:search][:title])#ここであいまい検索のパラメーターを受け取る
+        end
+          if params[:search] && params[:search][:priority].present?
             @tasks = Task.priority_search(params[:search][:priority])
           end
-        end
+
       end
     end
-    @tasks = Task.all.page(params[:page]).per(1)
+    #binding.pry
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
 
