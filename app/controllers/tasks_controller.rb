@@ -8,15 +8,18 @@ class TasksController < ApplicationController
       #   @tasks = Task.where('title like ?',"%#{params[:search][:title]}%")#ここであいまい検索のパラメーターを受け取る
       # elsif params[:search][:priority].present?
       #   @tasks = Task.where(priority: params[:priority])
+      # @tasks.where('title like ?','%params[:search]%') if params[:search][:title].present?
     else
       @tasks = Task.all.order(created_at: "DESC")
-      # @tasks.where('title like ?','%params[:search]%') if params[:search][:title].present?
-    end
-    if params[:search][:title].present? && params[:search][:priority].present?
-    elsif params[:search][:title].present?
-      @tasks = Task.where('title like ?',"%#{params[:search][:title]}%")#ここであいまい検索のパラメーターを受け取る
-    elsif params[:search][:priority].present?
-      @tasks = Task.where('priority like ?',"%#{params[:search][:priority]}%")#
+      if params[:search]
+        if params[:search][:title].present? && params[:search][:priority].present?
+          @tasks = Task.where('title like ?',"%#{params[:search][:title]}%").where('priority like ?',"%#{params[:search][:priority]}%")
+        elsif params[:search][:title].present?
+          @tasks = Task.where('title like ?',"%#{params[:search][:title]}%")#ここであいまい検索のパラメーターを受け取る
+        elsif params[:search][:priority].present?
+          @tasks = Task.where('priority like ?',"%#{params[:search][:priority]}%")#
+        end
+      end
     end
   end
 
