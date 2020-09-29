@@ -1,3 +1,5 @@
+<br>
+<br>
 <h1>投稿一覧</h1>
 
 <div class="search-form">
@@ -26,7 +28,7 @@
       <td class="task_limit_row"><%= task.time_limit %></td>
       <td class="task_priority"><%= task.priority %></td>
       <td class="task_to_do"><%= task.to_do %></td>
-      <td><% link_to "詳細を確認する。", task_path(task.id) %></td>
+      <td><%= link_to "詳細を確認する。", task_path(task.id) %></td>
       <td><%= link_to "タスクを編集する", edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
       <td><%= link_to "タスクを削除する", task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
       <% end %>

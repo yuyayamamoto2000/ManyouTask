@@ -1,23 +1,37 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Microposts</title>
+    <title>Manyou</title>
     <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-    <!-- コード追加 Bootstrap CSS読み込みコード-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- コード追加 Bootstrap JavaScript読み込みコード-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
-  <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key}") %>
-      <% end %>
+
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-light navbar-fixed-top bg-info">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
+                <span class="sr-only">Bootstrap</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+              <div id="gnavi" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><%= link_to 'タスク一覧へ', tasks_path %></li>
+                  <li><%= link_to 'タスク登録へ', new_task_path %></li>
+                </ul>
+              </div>
+          </div>
+        </nav>
+    </header>
+    <div class="wrapper">
+      <%= yield %>
+    </div>
   </body>
 </html>
