@@ -15,9 +15,9 @@ class TasksController < ApplicationController
         if params[:search][:title].present? && params[:search][:priority].present?
           @tasks = Task.where('title like ?',"%#{params[:search][:title]}%").where('priority like ?',"%#{params[:search][:priority]}%")
         elsif params[:search][:title].present?
-          @tasks = Task.where('title like ?',"%#{params[:search][:title]}%")#ここであいまい検索のパラメーターを受け取る
+           @tasks = Task.title_search(params[:search][:title])#ここであいまい検索のパラメーターを受け取る
         elsif params[:search][:priority].present?
-          @tasks = Task.where('priority like ?',"%#{params[:search][:priority]}%")#
+          @tasks = Task.priority_search(params[:search][:priority])
         end
       end
     end
