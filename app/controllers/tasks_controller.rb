@@ -20,6 +20,7 @@ class TasksController < ApplicationController
         end
       end
     end
+    @tasks = Task.all.page(params[:page]).per(1)
   end
 
 
