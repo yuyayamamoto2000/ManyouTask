@@ -43,6 +43,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         #タスク一覧ページに遷移
         visit tasks_path
         task_list = all('td.task_row')
+
         expect(task_list[0]).to have_content 'name3'
       end
     end
@@ -73,6 +74,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
         expect(task_to_do[0]).to have_content '高'
       end
     end
+
   end
   describe '詳細表示機能' do#describeには、「何の仕様についてなのか」
     context '任意のタスク詳細画面に遷移した場合' do#contextには「状況・状態を分類」したテスト内容
