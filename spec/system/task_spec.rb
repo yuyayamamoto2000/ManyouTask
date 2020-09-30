@@ -55,6 +55,7 @@ RSpec.describe 'タスク管理機能', type: :system do#describeには、「何
       it '期限が迫っているタスクが一番上に表示される' do
         visit tasks_path
         click_on '終了期限でソートする'
+        sleep(0.8)
         task_limit = all('td.task_limit_row')
         expect(task_limit[0]).to have_content '2020-09-30 12:00:00'
       end

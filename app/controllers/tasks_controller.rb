@@ -1,30 +1,29 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = Task.all
+    @tasks = Task.all.page(params[:page]).per(10)
     if params[:sort_to_do] == "true"
       @tasks = @tasks.order(to_do: "ASC")
-    else
-      @tasks = @tasks.order(to_do: "DESC")
-      if params[:sort_expired] == "true"
-        @tasks = @tasks.order(time_limit: "DESC")
-      else
-        @tasks = @tasks.order(created_at: "DESC")
-        if params[:search] && params[:search][:title].present?
-          #if params[:search][:title].present? && params[:search][:priority].present?
-            @tasks = Task.title_search(params[:search][:title]).priority_search(params[:search][:priority])
-          #elsif params[:search][:title].present?
-            #@tasks = Task.title_search(params[:search][:title])#ここであいまい検索のパラメーターを受け取る
-        end
-          if params[:search] && params[:search][:priority].present?
-            @tasks = Task.priority_search(params[:search][:priority])
-          end
+      # else
+      #   @tasks = @tasks.order(to_do: "DESC")
+    elsif params[:sort_expired] == "true"
+      @tasks = @tasks.order(time_limit: "DESC")
 
-      end
+
+      if params[:search] && params[:search][:title].present?
+        #if params[:search][:title].present? && params[:search][:priority].present?
+        @tasks = Task.title_search(params[:search][:title]).priority_search(params[:search][:priority])
+        #elsif params[:search][:title].present?
+        #@tasks = Task.title_search(params[:search][:title])#ここであいまい検索のパラメーターを受け取る
+
+      elsif params[:search] && params[:search][:priority].present?
+        @tasks = Task.priority_search(params[:search][:priority])
+      end    #binding.pry
+      #@tasks = @tasks.order(id: "DESC")
     end
-    #binding.pry
-    @tasks = @tasks.page(params[:page]).per(10)
+    @tasks = @tasks.order(id: "DESC")
   end
+
 
 
   def new
