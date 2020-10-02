@@ -1,7 +1,25 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    @tasks = Task.all
+    if params[:search] && params[:search][:title].present?
+      #if params[:search][:title].present? && params[:search][:priority].present?
+      @tasks = Task.title_search(params[:search][:title]).priority_search(params[:search][:priority])
+      #elsif params[:search][:title].present?
+      #@tasks = Task.title_search(params[:search][:title])#ここであいまい検索のパラメーターを受け取る
+
+    elsif params[:search] && params[:search][:priority].present?
+      @tasks = Task.priority_search(params[:search][:priority])
+    end
+    if params[:sort_to_do] == "true"
+      @tasks = @tasks.order(to_do: "ASC")
+      # else
+      #   @tasks = @tasks.order(to_do: "DESC")
+    elsif params[:sort_expired] == "true"
+      @tasks = @tasks.order(time_limit: "DESC")
+    end
+    #@tasks = @tasks.order(id: "DESC")
+    @tasks = @tasks.order(id: "DESC").page(params[:page]).per(5)
   end
 
   def new
@@ -44,7 +62,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :time_limit, :priority, :to_do)
   end
 
   def set_task
