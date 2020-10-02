@@ -1,19 +1,39 @@
+<br>
+<br>
 <h1>投稿一覧</h1>
+
+<div class="search-form">
+  <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
+    <%= f.text_field :title %>
+    <%= f.select :priority, [["未着手", 0 ], ["着手中", 1 ], ["完了", 2 ]] %>
+    <%= f.submit '検索' %>
+  <% end %>
+</div>
+
 <div class="contents">
   <table>
     <tr>
       <th>タイトル</th>
       <th>内容</th>
+      <th>終了期限</th>
+      <th>進捗</th>
+      <th>優先順位</th>
     </tr>
     <% @tasks.each do |task| %>
     <tr>
-      <td><%= task.title %></td>
-      <td><%= task.content %></td>
-      <td><% link_to "詳細を確認する。", task_path(task.id) %></td>
+      <td class="task_row"><%= task.title %></td>
+      <td class="task_row"><%= task.content %></td>
+      <td class="task_limit_row"><%= task.time_limit %></td>
+      <td class="task_priority"><%= task.priority %></td>
+      <td class="task_to_do"><%= task.to_do %></td>
+      <td><%= link_to "詳細を確認する。", task_path(task.id) %></td>
       <td><%= link_to "タスクを編集する", edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
       <td><%= link_to "タスクを削除する", task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
       <% end %>
     </tr>
   </table>
 </div>
+<%= link_to "優先順位でソートする", tasks_path(sort_to_do: "true") %>
+<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
 <%= link_to '新しくタスクを追加する', new_task_path %>
+<%= paginate @tasks %>
