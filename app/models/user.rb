@@ -4,4 +4,5 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   beffore_validation { email.downcase! }
   has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }
 end
