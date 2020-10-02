@@ -19,7 +19,7 @@ class TasksController < ApplicationController
       @tasks = @tasks.order(time_limit: "DESC")
     end
     #@tasks = @tasks.order(id: "DESC")
-    @tasks = @tasks.order(id: "DESC").page(params[:page]).per(10)
+    @tasks = @tasks.order(id: "DESC").page(params[:page]).per(5)
   end
 
   def new
