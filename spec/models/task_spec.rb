@@ -25,7 +25,7 @@ RSpec.describe Task, type: :model do
   end
     describe '検索機能' do
       # 必要に応じて、テストデータの内容を変更して構わない
-      task = FactoryBot.create(:task, title: 'name1')
+      task = FactoryBot.create(:first_task, title: 'name1')
       second_task = FactoryBot.create(:second_task, title: "name2")
       context 'scopeメソッドでタイトルのあいまい検索をした場合' do
         it "検索キーワードを含むタスクが絞り込まれる" do
@@ -37,14 +37,15 @@ RSpec.describe Task, type: :model do
       context 'scopeメソッドでステータス検索をした場合' do
         it "ステータスに完全一致するタスクが絞り込まれる" do
           # ここに内容を記載する
-          expect(Task.priority_search('着手')).to include(task)
-          expect(Task.priority_search('未着手')).not_to include(second_task)
+          expect(Task.priority_search(2)).to include(task)
+          expect(Task.priority_search(0)).not_to include(second_task)
         end
       end
       context 'scopeメソッドでタイトルのあいまい検索とステータス検索をした場合' do
         it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-          expect(Task.title_search('name1').priority_search('着手')).to include(task)
-          expect(Task.title_search('name3').priority_search('未着手')).not_to include(second_task)
+          expect(Task.title_search('1').priority_search(2)).to include(task)
+          expect(Task.title_search('2').priority_search(2)).not_to include(second_task)
+          expect(Task.title_search('3').priority_search(0)).not_to include(task)
           # expect(Task.priority_search('着手')).to include(task)
           # expect(Task.priority_search('未着手')).not_to include(second_task)
         end
