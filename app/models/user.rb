@@ -8,12 +8,21 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
   before_destroy :check_last_update_admin
   before_update :check_last_update_admin
+  before_destroy :check_can_destroy_admin
+  before_update :check_can_change_admin
 
   private
   def check_last_update_admin
-    if self.admin? && User.all.where(admin: "true").count == 1
+    if self.admin? && User.where(admin: "true").count == 1
       # return false　ではなく throw :abort
       throw :abort
+    end
+  end
+  def check_can_change_admin
+    if User.where(admin: true).count == 1 && self.admin_change == [true, false]
+      errors.add :base, '管理者が一人以上必要なため、権限の変更はできません'
+      throw(:abord)
+    #   throw :abort if User.where(admin: true).count == 1 && admin == false
     end
   end
 end

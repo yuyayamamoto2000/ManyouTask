@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    login_checker
   end
 
   def create
