@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
   before_action :if_not_admin
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user
+  before_action :admin_user?
 
   def index
     @users = User.includes(:tasks)

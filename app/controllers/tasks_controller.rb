@@ -1,5 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :current_user
+  before_action :authenticate_user
+  before_action :logged_in?
+
   def index
     @tasks = current_user.tasks
     if params[:search] && params[:search][:title].present?

@@ -8,4 +8,19 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_path
     end
   end
+  def admin_user?
+   if current_user.admin != true
+     if current_user.id != params[:id].to_i
+       flash[:notice] = "権限がありません。"
+       redirect_to tasks_path
+     end
+   end
+ end
+ def me?
+   @user = User.find(params[:id])
+   unless current_user == @user
+     flash[:notice] = "アクセスできません。"
+     redirect_to new_session_path
+   end
+ end
 end
