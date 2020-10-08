@@ -26,6 +26,7 @@
 
   <%= f.select(:priority, {未着手: '未着手', 着手中: '着手中', 完了: '完了'}, { class: "task_priority" }) %>
   <%= f.select(:to_do, {高: '高', 中: '中', 低: '低'}, { class: "task_to_do" }) %>
+  <%= f.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
   <%= f.submit %>
 <% end %>
 <%= link_to t('view.back'), tasks_path %>
