@@ -6,7 +6,9 @@
   <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
     <%= f.text_field :title %>
     <%= f.select :priority, [["未着手", 0 ], ["着手中", 1 ], ["完了", 2 ]] %>
+      <%= f.select :label_id, Label.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
     <%= f.submit '検索' %>
+  
   <% end %>
 </div>
 
