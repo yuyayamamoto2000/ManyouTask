@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_10_08_155215) do
+=======
+ActiveRecord::Schema.define(version: 2020_10_03_123231) do
+>>>>>>> edd2e86bf039d0634cae4e8556178e5cd93d808b
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_155215) do
     t.bigint "user_id"
     t.index ["title"], name: "index_tasks_on_title"
     t.index ["user_id"], name: "index_tasks_on_user_id"
+<<<<<<< HEAD
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,5 +67,19 @@ ActiveRecord::Schema.define(version: 2020_10_08_155215) do
 
   add_foreign_key "task_labels", "labels"
   add_foreign_key "task_labels", "tasks"
+=======
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+>>>>>>> edd2e86bf039d0634cae4e8556178e5cd93d808b
   add_foreign_key "tasks", "users"
 end

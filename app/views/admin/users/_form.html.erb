@@ -1,0 +1,21 @@
+<%= form_with(model: @user, local: true, url: choose_new_or_edit ) do |f| %>
+  <div class="center">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+
+    <%= f.label :admin %>
+    <%= f.check_box :admin, {}, 'true', 'false' %>
+    <br>
+
+    <%= f.submit '登録' %>
+  </div>
+<% end %>

@@ -10,6 +10,7 @@ User.create!(name:  "管理者",
              password:  "adminsan",
              password_confirmation: "adminsan",
              admin: true)
+<<<<<<< HEAD
 
 
 
@@ -17,3 +18,5 @@ User.create!(name:  "管理者",
 10.times do |n|
   labels = Label.create!([name: "ラベル#{n + 1}"])
 end
+=======
+>>>>>>> edd2e86bf039d0634cae4e8556178e5cd93d808b
