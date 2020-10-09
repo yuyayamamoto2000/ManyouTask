@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 gem 'pry-rails'
 gem 'rails-i18n', '~> 5.1'
+gem 'bcrypt', '3.1.11'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '= 5.2.4'
 # Use postgresql as the database for Active Record
