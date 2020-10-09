@@ -10,3 +10,10 @@ User.create!(name:  "管理者",
              password:  "adminsan",
              password_confirmation: "adminsan",
              admin: true)
+
+
+
+
+10.times do |n|
+  labels = Label.create!([name: "ラベル#{n + 1}"])
+end
