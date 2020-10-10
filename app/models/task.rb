@@ -1,20 +1,17 @@
 class Task < ApplicationRecord
   belongs_to :user
-  validates :title, presence: true
-  validates :content, presence: true
+  has_many :task_labels, dependent: :destroy
+  has_many :labels, through: :task_labels
+
   scope :title_search, -> (params){ where('title like ?',"%#{params}%") }
   scope :priority_search, ->(params) { where(priority: params) }
- #  enum to_do: {
- #    low: 0,
- #    medium: 1,
- #    high: 2
- #  }
- #  enum priority:{
- #   already: 0,
- #   not_yet: 1
- # }
-has_many :task_labels, dependent: :destroy
-has_many :labels, through: :task_labels
- enum priority: %i[未着手 着手中 完了]
- enum to_do: %i[高 中 低]
+  scope :label_search, ->(params) { where(label_id: params) }
+  # scope :label_search, ->(params) { where(labels: { id: params[:name] })}
+  # scope :label_search, ->(params) { where(task_id: params) }
+
+  enum priority: %i[未着手 着手中 完了]
+  enum to_do: %i[高 中 低]
+
+  validates :title, presence: true
+  validates :content, presence: true
 end
