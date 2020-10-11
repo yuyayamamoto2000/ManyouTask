@@ -22,7 +22,7 @@
       <th>優先順位</th>
     </tr>
     <% @tasks.each do |task| %>
-    <tr>
+    <tr class='task_list'>
       <td class="task_row"><%= task.title %></td>
       <td class="task_row"><%= task.content %></td>
       <td class="task_limit_row"><%= task.time_limit %></td>
