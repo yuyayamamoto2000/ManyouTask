@@ -6,14 +6,32 @@ class TasksController < ApplicationController
 
   def index
     @tasks = current_user.tasks
-    if params[:search] && params[:search][:title].present?
-      #if params[:search][:title].present? && params[:search][:priority].present?
-      @tasks = Task.title_search(params[:search][:title]).priority_search(params[:search][:priority])
-      #elsif params[:search][:title].present?
-      #@tasks = Task.title_search(params[:search][:title])#ここであいまい検索のパラメーターを受け取る
+    if params[:search] && params[:search][:title].present? && params[:search][:priority].present? && params[:search][:label_id].present? #全部検索
+      @tasl_labels = TaskLabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = Task.title_search(params[:search][:title]).priority_search(params[:search][:priority]).where(id: @tasl_labels)
 
-    elsif params[:search] && params[:search][:priority].present?
+    elsif params[:search] && params[:search][:title].present? && params[:search][:priority].present? #タイトルとプライオリティ
+      @tasks = Task.title_search(params[:search][:title]).priority_search(params[:search][:priority])
+
+    elsif params[:search] && params[:search][:title].present? && params[:search][:label_id].present? #タイトルとラベル
+      @tasl_labels = TaskLabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = Task.title_search(params[:search][:title]).where(id: @tasl_labels)
+
+    elsif params[:search] && params[:search][:label_id].present? && params[:search][:priority].present? #ラベルとプライオリティ
+      # @tasks = Task.priority_search(params[:search][:priority]).join(:task_labels).where(task_labels: { id: params[:serch][:label_ids] }).uniq
+      # @tasks = Task.pluck(:label_id).joins.where('task_labels.label_id = ?', params[:label_id])
+      @tasl_labels = TaskLabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = Task.priority_search(params[:search][:priority]).where(id: @tasl_labels)
+
+    elsif params[:search] && params[:search][:priority].present? #プライオリティのみ
       @tasks = Task.priority_search(params[:search][:priority])
+      # @tasks = Task.where(params[:search][:task_id])
+    elsif params[:search] && params[:search][:title].present? #タイトルのみ
+        #if params[:search][:title].present? && params[:search][:priority].present?
+          @tasks = Task.title_search(params[:search][:title])
+    elsif params[:search] && params[:search][:label_id].present? # ラベルのみ
+      @tasl_labels = TaskLabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = Task.where(id: @tasl_labels)
     end
     if params[:sort_to_do] == "true"
       @tasks = @tasks.order(to_do: "ASC")
@@ -23,7 +41,7 @@ class TasksController < ApplicationController
       @tasks = @tasks.order(time_limit: "DESC")
     end
     #@tasks = @tasks.order(id: "DESC")
-    @tasks = @tasks.order(id: "DESC").page(params[:page]).per(5)
+    @kaminari = @tasks.order(id: "DESC").page(params[:page]).per(5)
   end
 
   def new
@@ -67,7 +85,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :time_limit, :priority, :to_do)
+    params.require(:task).permit(:title, :content, :time_limit, :priority, :to_do, { label_ids: [] })
   end
 
   def set_task
