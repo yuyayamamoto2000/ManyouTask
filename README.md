@@ -27,7 +27,7 @@
 | id   | integer |
 | name | string  |
 
-## Labelling
+## task_labels
 
 |  カラム名  |    データ型   |
 ----|----
